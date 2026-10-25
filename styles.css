@@ -747,3 +747,13 @@ html{scroll-behavior:smooth}
     white-space:nowrap;font-size:10.5px;padding:6px 9px;
   }
 }
+
+
+/* Homepage portal and immersive Studio use the same name-sign identity.
+   Keep the tiny teaser sign readable; its motion is optional and subdued. */
+#lyn .portal-sign-lights{animation:lyn-sign-flicker 9s linear infinite}
+#lyn .portal-sign-rim{filter:drop-shadow(0 0 2px rgba(160,230,255,.82))}
+#lyn .portal-sign-text{filter:drop-shadow(0 0 2px rgba(162,222,255,.82))}
+#lyn .portal-sign-aura{filter:drop-shadow(0 0 7px rgba(140,215,255,.35))}
+@media (prefers-reduced-motion:reduce){#lyn .portal-sign-lights{animation:none!important}}
+#lyn[data-motion="reduced"] .portal-sign-lights{animation:none!important}
