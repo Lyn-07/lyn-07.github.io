@@ -121,12 +121,12 @@ window.PORTFOLIO = {
           thumb: "thumb-cny-walkthrough-reel.jpg", ratio: "1/1", position: "50% 35%" },
         { kind: "video", platform: "instagram", group: "later", title: "Where Did RM20,000 Go? — SPM Excellence Awards", source: "Instagram Reel · @genz_bayanbaru",
           description: "Mandarin explainer about the SPM Chinese-language excellence awards and SSPN savings.",
-          stats: "34.3K views · 839 likes · 684 shares", statsNote: "Instagram snapshot",
+          stats: "34.4K views · 837 likes · 684 shares", statsNote: "Recorded 25 Oct 2026",
           url: "https://www.instagram.com/reel/DXWloeikVtl/", cta: "Watch Reel",
           thumb: "thumb-spm-rm20000-reel.jpg", ratio: "1/1", position: "50% 35%" },
         { kind: "video", platform: "instagram", group: "later", title: "SPM Top Scorers Speak — Student Interviews", source: "Instagram Reel · @genz_bayanbaru",
           description: "Student reactions and questions about the awards, SSPN registration and SPM study tips.",
-          stats: "22.7K views · 356 likes · 320 shares", statsNote: "Instagram snapshot",
+          stats: "22.7K views · 357 likes · 320 shares", statsNote: "Recorded 25 Oct 2026",
           url: "https://www.instagram.com/reel/DXjGGiJkW65/", cta: "Watch Reel",
           thumb: "thumb-spm-top-scorers-reel.jpg", ratio: "1/1", position: "50% 35%" }
       ],
@@ -140,9 +140,9 @@ window.PORTFOLIO = {
       ],
       evidence: [
         { value: "242,634", label: "Instagram views", note: "Instagram Insights, 26 Dec 2025 – 24 Jan 2026. 3.1% from ads." },
-        { value: "14,577", label: "Instagram interactions", note: "Same window. 0.7% from ads." },
-        { value: "70,264", label: "accounts reached", note: "Instagram, same window." },
-        { value: "75.5%", label: "of views from non-followers", note: "Instagram, same window." },
+        { value: "14,577", label: "Instagram interactions", note: "Instagram Insights, 26 Dec 2025 – 24 Jan 2026. 0.7% from ads." },
+        { value: "70,264", label: "accounts reached", note: "Instagram Insights, 26 Dec 2025 – 24 Jan 2026." },
+        { value: "75.5%", label: "of views from non-followers", note: "Instagram Insights, 26 Dec 2025 – 24 Jan 2026." },
         { value: "≈70.6K", label: "organic views on one Reel", note: "Self-reported total. A day-5 snapshot showed 67,940 views (50,871 Instagram, 17,069 Facebook) and 3.5K shares." }
       ],
       figures: [
@@ -151,7 +151,7 @@ window.PORTFOLIO = {
           caption: "Instagram Insights, 26 Dec 2025 – 24 Jan 2026." },
         { type: "bars", percent: true, title: "Who Saw the Content",
           rows: [{ label: "Non-followers", value: 75.5 }, { label: "Followers", value: 24.5 }],
-          caption: "Share of Instagram views, same window." }
+          caption: "Share of Instagram views, 26 Dec 2025 – 24 Jan 2026." }
       ],
       limits: "Views count every time content is shown, including repeat views by the same person, so they aren't unique people. Instagram and Facebook figures come from separate tools and shouldn't be added together. Event attendance can't be attributed to the account.",
       lessons: [
@@ -167,28 +167,29 @@ window.PORTFOLIO = {
       short: "**Multilingual video production** in Mandarin and Malay, including three AI-generated productions and two Malay adaptations.",
       period: "Apr – Jul 2026",
       org: "Freelance, community and public-affairs accounts",
-      role: "Freelance Video Producer & Digital Content Creator",
+      role: "Digital Content Creator & Video Producer (Freelance)",
       tools: "Kling AI, Dora AI",
       summary: "Short videos for community and public-affairs social accounts in Mandarin and Malay. This case covers selected work, including **3 AI-generated video productions and 2 Malay-language adaptations**. It isn't a count of everything I've produced.",
       highlights: ["Multilingual video production in Mandarin and Malay", "3 AI-generated videos + 2 Malay adaptations", "AI-assisted video published by Oriental Daily News Malaysia"],
       cover: { src: "thumb-saifuddin-ai-video.jpg", position: "50% 40%", fallback: "Multilingual video in Mandarin and Malay" },
-      workIntro: "Public productions, each credited to the page or outlet that published it. No partnership with any publisher is implied.",
+      workIntro: "Selected productions, credited to the original accounts and outlets that published them.",
       work: [
         { kind: "video", platform: "facebook", title: "AI-Assisted Video (Kling AI)", source: "Facebook · Published by Oriental Daily News Malaysia",
-          description: "AI-assisted production published on the outlet's Facebook page. No partnership, employment or sponsorship implied.",
+          description: "AI-assisted production published on Oriental Daily News Malaysia's Facebook page.",
           stats: "About 40K views · 453 likes · 294 comments", statsNote: "when recorded",
           url: "https://www.facebook.com/watch/?v=2277798306087706", cta: "Watch on Facebook",
           thumb: "thumb-oriental-daily-ai-video.jpg", ratio: "1/1", position: "50% 0%" },
         { kind: "video", platform: "facebook", title: "AI-Assisted Video", source: "Facebook · Posted by Saifuddin Nasution Ismail",
-          description: "Shown as scripting, localisation and production work, not as an endorsement.",
+          description: "A public-affairs video featuring scripting, localisation and production work.",
+          stats: "7.7K views · 155 likes · 165 shares", statsNote: "Recorded 25 Oct 2026",
           url: "https://www.facebook.com/share/r/19if7jYZYW/?mibextid=wwXIfr", cta: "Watch on Facebook",
           thumb: "thumb-saifuddin-ai-video.jpg", ratio: "1/1", position: "50% 40%" },
         { kind: "video", platform: "youtube", title: "8TV Mandarin News Live Segment", source: "YouTube · 8TV Mandarin News Live",
-          description: "Footage referenced in a news segment. No partnership implied.",
+          description: "Footage referenced in a Mandarin news segment.",
           url: "https://www.youtube.com/watch?v=vkVxZNNH6ew", cta: "Watch on YouTube",
           thumb: "thumb-8tv-news-segment.jpg", ratio: "1/1", position: "50% 50%" }
       ],
-      challenge: "Public information has to survive the scroll. These videos needed a hook in the first seconds, clear captions, and versions that worked for both Mandarin- and Malay-speaking viewers.",
+      challenge: "Public information has to survive the scroll. These videos needed a hook in the first seconds, clear captions, and versions that worked for both Mandarin and Malay speakers.",
       process: [
         { title: "Concept and Hook", text: "Agreed the message, then wrote an opening that earns the next five seconds." },
         { title: "Script and Interview Planning", text: "Scripts, interview questions and shot lists, where a piece needed them." },
@@ -200,7 +201,7 @@ window.PORTFOLIO = {
         { value: "3", label: "core AI-generated video productions", note: "Made with Kling AI and Dora AI." },
         { value: "2", label: "Malay-language adaptations", note: "Versions of those videos, so 5 delivered AI-video versions in total. Not a count of all my video work." }
       ],
-      coverage: "One AI-assisted video was published by Oriental Daily News Malaysia on Facebook (about 40K views, 453 likes and 294 comments when recorded), and footage was referenced in an 8TV Mandarin News Live segment. I had no partnership with either outlet.",
+      coverage: "One AI-assisted video was published by Oriental Daily News Malaysia on Facebook (about 40K views, 453 likes and 294 comments when recorded), and footage was referenced in an 8TV Mandarin News Live segment.",
       limits: "The views belong to the accounts that published these videos and to their audiences. I'm showing scripting, localisation and production work, not claiming a channel's reach. These projects don't represent a political position.",
       lessons: [
         "Localising is rewriting, not converting. A hook that works in Mandarin often needs a different angle for Malay-speaking viewers, not just a translated caption.",
@@ -276,7 +277,7 @@ window.PORTFOLIO = {
     timeline: [
       { when: "Jul 2026 – Present", role: "SEO Specialist (Freelance)", org: "VeecoTech Solutions" },
       { when: "Mar – Jul 2026", role: "Marketing Specialist (Intern)", org: "VeecoTech Solutions", detail: "SEO articles, Reels, event marketing and website localisation." },
-      { when: "Dec 2025 – Present (Project-based)", role: "Freelance Video Producer & Digital Content Creator", org: "Freelance", detail: "Selected projects: Bayan Baru CNY social campaign; community and public-affairs content; multilingual and AI-assisted video." },
+      { when: "Dec 2025 – Present (Project-based)", role: "Digital Content Creator & Video Producer (Freelance)", org: "Freelance", detail: "Selected projects: Bayan Baru CNY social campaign; community and public-affairs content; multilingual and AI-assisted video." },
       { when: "Mar – Sep 2025", role: "Social Media Assistant (Part-time)", org: "Direct Import Concept" }
     ],
     education: [

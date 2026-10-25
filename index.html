@@ -90,7 +90,7 @@
   </div></section>
 
   <section class="sec" id="work" aria-labelledby="work-h"><div class="wrap">
-    <div class="sec-head"><h2 class="h2" id="work-h">Selected Work</h2><p class="lede">Four projects. Each one shows my role, the evidence, and what the numbers can't tell you.</p></div>
+    <div class="sec-head"><h2 class="h2" id="work-h">Selected Work</h2><p class="lede">Four projects. Select any project to explore the case study, my role, and the evidence behind the results.</p></div>
     <ul class="work" id="work-list"></ul>
     <p class="aside">Prefer to explore? The same projects live inside my studio. <button type="button" class="link" data-go="world">Enter My World</button></p>
   </div></section>
@@ -140,11 +140,11 @@
 <div id="view-world" hidden><section class="world" aria-labelledby="world-h"><div class="wrap">
   <div class="stage-shell" id="stage-shell"><div class="stage" id="stage">
     <div class="stage-ui">
-      <div class="welcome"><h1 class="stage-title" id="world-h" tabindex="-1">Welcome to My Studio.</h1><p class="stage-hint">Hover or tap the glowing points. Keyboard: Tab, then Enter.</p></div>
+      <div class="welcome"><h1 class="stage-title" id="world-h" tabindex="-1">Welcome to My Studio.</h1><p class="stage-hint">Explore the glowing points. Try clicking the ceiling lamp or plant, too! Keyboard: Tab, then Enter.</p></div>
       <div class="stage-tools"><button type="button" class="chip-dark" data-act="motion" id="motion-btn" aria-pressed="false">Reduce Motion</button><button type="button" class="chip-dark" data-act="leave">Leave Studio</button></div>
     </div>
     <svg class="scene" id="scene" viewBox="0 0 1000 640" aria-labelledby="scene-t">
-      <title id="scene-t">Lyn's studio: a bright blue room with a window, campaign board, desktop computer, bookshelf, results screen and camera</title>
+      <title id="scene-t">Lyn's interactive studio, featuring a clickable ceiling lamp and plant alongside portfolio objects</title>
       <defs>
         <linearGradient id="g-back" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#78A8EE"/><stop offset="1" stop-color="#4E86DA"/></linearGradient>
         <radialGradient id="g-backlight" cx=".5" cy=".3" r=".65"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".32"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
@@ -185,7 +185,15 @@
         </g>
         <path d="M160 150L160 315L480 570L380 610Z" fill="url(#g-beam)" pointer-events="none"/><path d="M300 470L470 456L560 572L330 602Z" fill="#FFF3D6" opacity=".3" filter="url(#f-blur)" pointer-events="none"/>
         <path d="M330 520H780L860 610H250Z" fill="#FFFFFF" opacity=".22" stroke="#FFFFFF" stroke-opacity=".4"/>
-        <path d="M540 0V56" stroke="#1B3E7A" stroke-width="2"/><ellipse cx="540" cy="84" rx="60" ry="16" fill="url(#g-warm)"/><path d="M516 74Q540 44 564 74Z" fill="#FBF8F1"/>
+        <!-- Ceiling light: interactive, 3 settings: day/off -> warm on -> night -> day/off -->
+        <g class="lamp-switch" id="lamp-switch" data-act="lamp" role="button" tabindex="0" aria-label="Ceiling lamp is off. Turn on warm lighting.">
+          <title id="lamp-switch-title">Turn on warm lighting</title>
+          <rect x="488" y="2" width="104" height="128" fill="transparent"/>
+          <path d="M540 0V56" stroke="#1B3E7A" stroke-width="2"/>
+          <ellipse class="lamp-glow" cx="540" cy="84" rx="60" ry="16" fill="url(#g-warm)"/>
+          <path class="lamp-shade" d="M516 74Q540 44 564 74Z" fill="#FBF8F1"/>
+          <circle class="lamp-cue" cx="540" cy="73" r="32" fill="none" stroke="#FFE08A" stroke-width="2.5" stroke-dasharray="5 6"/>
+        </g>
         <rect x="452" y="152" width="176" height="42" rx="21" fill="#0E3B80" opacity=".9"/><text class="neon" x="540" y="180" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-weight="700" font-size="22" fill="#FBF8F1">stay curious</text>
         <g fill="#FFF6E2"><circle class="mote" cx="250" cy="300" r="2.2"/><circle class="mote" cx="305" cy="385" r="1.8" style="animation-delay:-2s"/><circle class="mote" cx="225" cy="420" r="2.4" style="animation-delay:-4s"/><circle class="mote" cx="345" cy="450" r="1.8" style="animation-delay:-6s"/><circle class="mote" cx="280" cy="345" r="1.6" style="animation-delay:-3s"/></g>
 
@@ -260,8 +268,13 @@
       <!-- Layer 3: plant + camera -->
       <g class="depth" data-d="10">
         <ellipse cx="112" cy="630" rx="70" ry="9" fill="#1C3F7A" opacity=".3" filter="url(#f-blur)"/>
-        <g class="sway"><path d="M110 560C100 520 80 500 58 494" stroke="#2A7D96" stroke-width="3" fill="none"/><ellipse cx="70" cy="500" rx="20" ry="44" transform="rotate(-38 70 500)" fill="#2E8CA8"/><ellipse cx="112" cy="478" rx="18" ry="52" transform="rotate(6 112 478)" fill="#46A9C2"/><ellipse cx="150" cy="504" rx="18" ry="42" transform="rotate(34 150 504)" fill="#2E8CA8"/><ellipse cx="92" cy="526" rx="14" ry="30" transform="rotate(-62 92 526)" fill="#46A9C2"/></g>
-        <path d="M70 556H152L142 630H80Z" fill="#FBF8F1"/><path d="M130 556H152L142 630H122Z" fill="#D6DEEC"/>
+        <g class="plant-hot" id="plant-switch" data-act="plant" role="button" tabindex="0" aria-label="Plant: reveal a little surprise">
+          <title>Tap me — a tiny surprise lives here!</title>
+          <rect x="39" y="443" width="144" height="190" fill="transparent"/>
+          <g class="sway"><path d="M110 560C100 520 80 500 58 494" stroke="#2A7D96" stroke-width="3" fill="none"/><ellipse cx="70" cy="500" rx="20" ry="44" transform="rotate(-38 70 500)" fill="#2E8CA8"/><ellipse cx="112" cy="478" rx="18" ry="52" transform="rotate(6 112 478)" fill="#46A9C2"/><ellipse cx="150" cy="504" rx="18" ry="42" transform="rotate(34 150 504)" fill="#2E8CA8"/><ellipse cx="92" cy="526" rx="14" ry="30" transform="rotate(-62 92 526)" fill="#46A9C2"/></g>
+          <path d="M70 556H152L142 630H80Z" fill="#FBF8F1"/><path d="M130 556H152L142 630H122Z" fill="#D6DEEC"/>
+          <circle class="plant-focus" cx="110" cy="514" r="75" fill="none" stroke="#CBF5B4" stroke-width="3" stroke-dasharray="6 8"/>
+        </g>
 
         <!-- CAMERA -> video production case -->
         <g class="hot" data-obj="camera" tabindex="0" role="button" aria-label="Camera: multilingual video production">
@@ -275,11 +288,27 @@
           <g class="tag" transform="translate(728 326)"><rect width="186" height="28" rx="14"/><text x="93" y="19">Video production</text></g>
         </g>
       </g>
+      <!-- Lighting layers are visual only, so the project hotspots still work. -->
+      <g class="scene-night" pointer-events="none">
+        <rect x="0" y="0" width="1000" height="640" fill="#0A1535" opacity=".68"/>
+        <g clip-path="url(#c-win)">
+          <rect x="30" y="120" width="140" height="270" fill="#102B5A" opacity=".9"/>
+          <path d="M116 186a16 16 0 1 1 16-25a17 17 0 1 0-16 25Z" fill="#F9EBBC"/>
+          <g fill="#E8F2FF"><circle cx="60" cy="182" r="1.6"/><circle cx="140" cy="235" r="1.5"/><circle cx="92" cy="163" r="1.3"/><circle cx="70" cy="250" r="1.2"/><circle cx="145" cy="190" r="1.2"/></g>
+        </g>
+      </g>
+      <g class="scene-light-pool" pointer-events="none">
+        <path d="M519 79H561L784 596H288Z" fill="url(#g-warm)" opacity=".38"/>
+        <ellipse cx="540" cy="110" rx="124" ry="86" fill="url(#g-warm)" opacity=".68"/>
+        <ellipse cx="540" cy="75" rx="75" ry="30" fill="url(#g-warm)" opacity=".9"/>
+        <path d="M516 74Q540 44 564 74Z" fill="#FFF4CB"/>
+      </g>
     </svg>
+    <div class="plant-message" id="plant-message" role="status" aria-live="polite" hidden></div>
   </div>
   <div class="room-card" id="room-card" role="region" aria-label="Selected object" hidden></div></div>
   <nav class="jump" id="jump" aria-label="Jump to an object"></nav>
-  <p class="world-note">An original 2.5D illustration made for this site in SVG. Every object opens the same projects listed on the homepage.</p>
+  <p class="world-note">An original interactive SVG studio. Glowing points open projects and galleries; the ceiling lamp and plant contain little extras.</p>
 </div></section></div>
 
 <!-- ================= CASE STUDY (built by app.js) ================= -->

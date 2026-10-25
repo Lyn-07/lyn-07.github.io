@@ -138,7 +138,7 @@
   // Images are deliberately kept INSIDE each case study, not on this overview.
   const workList = $("#work-list");
   workList.className = "work";
-  workList.innerHTML = D.cases.map((c) => `<li><button type="button" data-go="case:${c.id}" aria-label="Read case study: ${esc(c.title)}"><span class="w-disc">${esc(c.discipline)}</span><span><span class="w-title">${esc(c.title)}</span><span class="w-sum">${rich(c.short)}</span></span><span class="w-when">${esc(c.period)}</span><span class="w-go">${icon.arrow}</span></button></li>`).join("");
+  workList.innerHTML = D.cases.map((c) => `<li><button type="button" data-go="case:${c.id}" aria-label="Read case study: ${esc(c.title)}"><span class="w-disc">${esc(c.discipline)}</span><span><span class="w-title">${esc(c.title)}</span><span class="w-sum">${rich(c.short)}</span></span><span class="w-when">${esc(c.period)}</span><span class="w-go"><span class="w-go-label">View case study</span><span class="w-go-icon">${icon.arrow}</span></span></button></li>`).join("");
 
   const linkRow = (l) => {
     const unv = l.verified === false;
@@ -199,7 +199,7 @@
     const p = PLAT[w.platform] || PLAT.web;
     const fb = `<span class="wk-fallback"><span class="wk-fb-icon">${svg(p.icon, 36, 1.6)}</span><span class="wk-fb-title">${esc(w.title)}</span><span class="wk-fb-src">${esc(p.label)}</span></span>`;
     const unv = w.verified === false ? `<span class="flag" style="margin:4px 0 0">Check before publishing</span>` : "";
-    return `<a class="wk-card wk-video reveal${wide ? " wide" : ""}" href="${esc(w.url)}" target="_blank" rel="noopener">${thumb(w.thumb, w.ratio || "1/1", w.position, fb, `<span class="wk-play" aria-hidden="true">${playIcon}</span>`)}<span class="wk-body"><span class="wk-src">${svg(p.icon, 15, 1.8)}${esc(w.source || p.label)}</span><span class="wk-title">${esc(w.title)}</span>${w.description ? `<span class="wk-desc">${rich(w.description)}</span>` : ""}${w.stats ? `<span class="wk-stats">${esc(w.stats)}${w.statsNote ? ` <em>(${esc(w.statsNote)})</em>` : ""}</span>` : ""}${unv}<span class="wk-cta">${esc(w.cta || "Watch")}${icon.ext}${newTab}</span></span></a>`;
+    return `<a class="wk-card wk-video reveal${wide ? " wide" : ""}" href="${esc(w.url)}" target="_blank" rel="noopener">${thumb(w.thumb, w.ratio || "1/1", w.position, fb, `<span class="wk-play" aria-hidden="true">${playIcon}</span>`)}<span class="wk-body"><span class="wk-src">${svg(p.icon, 15, 1.8)}${esc(w.source || p.label)}</span><span class="wk-title">${esc(w.title)}</span>${w.description ? `<span class="wk-desc">${rich(w.description)}</span>` : ""}${w.stats ? `<span class="wk-stats">${esc(w.stats)}</span>${w.statsNote ? `<span class="wk-stats-date">${esc(w.statsNote)}</span>` : ""}` : ""}${unv}<span class="wk-cta">${esc(w.cta || "Watch")}${icon.ext}${newTab}</span></span></a>`;
   }
   function articleCard(a) {
     const fb = `<span class="wk-page"><span class="wk-page-kicker">${esc(a.publisher)}</span><span class="wk-page-h">${esc(a.title)}</span><span class="wk-page-tag">Published article</span></span>`;
@@ -277,6 +277,41 @@
 
   /* ---------- Studio ---------- */
   const stage = $("#stage"), scene = $("#scene"), card = $("#room-card"), shell = $("#stage-shell");
+  /* Studio micro-interactions: the ceiling lamp cycles day -> warm -> night -> day.
+     It's deliberately decorative; no navigation, persistence, or account access. */
+  const lightingModes = ["day", "warm", "night"];
+  const lamp = $("#lamp-switch"), lampTitle = $("#lamp-switch-title");
+  let lightIndex = 0;
+  function cycleLamp() {
+    lightIndex = (lightIndex + 1) % lightingModes.length;
+    syncLamp();
+  }
+  function syncLamp() {
+    stage.dataset.light = lightingModes[lightIndex];
+    const next = ["Turn on warm lighting", "Switch to night mode", "Turn lights off and return to daytime"][lightIndex];
+    const state = ["off (daytime)", "on (warm)", "night mode"][lightIndex];
+    lamp.setAttribute("aria-label", `Ceiling lamp: ${state}. ${next}.`);
+    lampTitle.textContent = next;
+  }
+  syncLamp();
+
+  const plant = $("#plant-switch"), plantMessage = $("#plant-message");
+  const plantLines = ["🌱 Keep growing — one idea at a time.", "✨ Small beginnings, big possibilities.", "💚 Thanks for exploring my little corner!", "🍃 Stay curious. Good ideas take root."];
+  let lastPlant = -1, plantTimer = null;
+  function surprisePlant() {
+    // Random reward, without repeating the same message twice in a row.
+    let next = Math.floor(Math.random() * plantLines.length);
+    if (next === lastPlant) next = (next + 1) % plantLines.length;
+    lastPlant = next;
+    plantMessage.textContent = plantLines[next];
+    plantMessage.hidden = false;
+    plant.classList.remove("is-sparkling");
+    void plant.getBoundingClientRect();
+    plant.classList.add("is-sparkling");
+    clearTimeout(plantTimer);
+    plantTimer = setTimeout(() => { plantMessage.hidden = true; plant.classList.remove("is-sparkling"); }, 4200);
+  }
+
   let lastHot = null, activeObj = null;
   const hotFor = (id) => $(`.hot[data-obj="${id}"]`, stage);
   function setActive(id) {
@@ -472,6 +507,8 @@
       else if (k === "open") openFromObject(a.dataset.target);
       else if (k === "leave") showHome(null);
       else if (k === "motion") toggleMotion();
+      else if (k === "lamp") cycleLamp();
+      else if (k === "plant") surprisePlant();
       else if (k === "top") toTop();
       else if (k === "pager") { const t = a.dataset.target; openCase(t, { from: ctx.from, obj: ctx.from === "world" ? objForCase(t) : null, replace: true }); }
       return;
@@ -483,6 +520,12 @@
     if (j) { lastHot = j; openObj(j.dataset.objBtn); }
   });
   stage.addEventListener("keydown", (e) => {
+    const interactive = e.target.closest && e.target.closest(".lamp-switch, .plant-hot");
+    if (interactive && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      if (interactive === lamp) cycleLamp(); else surprisePlant();
+      return;
+    }
     const h = e.target.closest && e.target.closest(".hot");
     if (!h) return;
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); lastHot = h; openObj(h.dataset.obj); }
