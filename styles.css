@@ -543,9 +543,9 @@ html{scroll-behavior:smooth}
   .depth[data-d="2"],.depth[data-d="10"]{transform:none!important}
   .depth[data-d="5"]{transform:translate(-300px, 150px) scale(1.12)!important;transform-origin:0 0}
   .depth[data-d="2"] .hot[data-obj="window"]{transform:translate(0px, 154px) scale(.68);transform-origin:0 0}
-  .depth[data-d="2"] .hot[data-obj="board"]{transform:translate(-78px, 125px) scale(.85);transform-origin:0 0}
-  .depth[data-d="2"] .hot[data-obj="shelf"]{transform:translate(-217px, 110px) scale(.9);transform-origin:0 0}
-  .depth[data-d="2"] .hot[data-obj="wall"]{transform:translate(-235px, 250px) scale(.85);transform-origin:0 0}
+  .depth[data-d="2"] .hot[data-obj="board"]{transform:translate(-41px, 125px) scale(.85);transform-origin:0 0}
+  .depth[data-d="2"] .hot[data-obj="shelf"]{transform:translate(-239px, 110px) scale(.9);transform-origin:0 0}
+  .depth[data-d="2"] .hot[data-obj="wall"]{transform:translate(-203px, 250px) scale(.85);transform-origin:0 0}
   .depth[data-d="2"] .lamp-switch{transform:translate(-203px, 25px) scale(.95);transform-origin:0 0}
   .depth[data-d="2"] .studio-sign{transform:translate(-176px, 50px) scale(.9);transform-origin:0 0}
   .depth[data-d="10"] .plant-hot{transform:translate(-15px, 150px) scale(1.1);transform-origin:0 0}
@@ -592,4 +592,51 @@ html{scroll-behavior:smooth}
   .plant-hot.is-sparkling .sway{animation:lyn-happy-leaves .85s ease both}
   /* The one-line instruction above the room replaces the old footer explanation. */
   .world-note{display:none}
+}
+
+/* === Studio visual polish, 2.5D: no 3D renderer, no image downloads === */
+#lyn .stage{box-shadow:0 28px 70px rgba(12,45,105,.25),inset 0 1px 0 rgba(255,255,255,.22)}
+#lyn .scene{isolation:isolate}
+#lyn .hot .obj{transition:filter .34s ease}
+/* Retain responsive SVG placement; only light, color and depth change. */
+#lyn .window-night-view{opacity:0;transition:opacity .85s ease}
+#lyn .window-sun-halo,#lyn .window-sun{transition:opacity .55s ease,transform .8s ease;transform-box:fill-box;transform-origin:center}
+#lyn .window-moon-rise{transform:translateY(18px);opacity:.15;transition:transform 1s cubic-bezier(.22,1,.36,1),opacity .7s ease}
+#lyn .stage[data-light="night"] .window-night-view{opacity:1}
+#lyn .stage[data-light="night"] .window-sun-halo,#lyn .stage[data-light="night"] .window-sun{opacity:0;transform:translateY(20px)}
+#lyn .stage[data-light="night"] .window-moon-rise{opacity:1;transform:translateY(0)}
+#lyn .hot[data-obj="window"]:is(:hover,:focus-visible) .window-sun{transform:translateY(-6px)}
+#lyn .hot[data-obj="window"]:is(:hover,:focus-visible) .window-night-view{filter:brightness(1.07)}
+/* Never animate a curtain over the existing Photography interaction. */
+#lyn .screen-dim{opacity:.3}
+#lyn .rec{opacity:1;filter:drop-shadow(0 0 2px #FF857F)}
+#lyn .rec-halo{opacity:.85;transition:opacity .25s ease}
+#lyn .hot[data-obj="camera"]:is(:hover,:focus-visible,.is-active) .rec{opacity:1;animation:none;fill:#FF5B4F}
+#lyn .hot[data-obj="camera"]:is(:hover,:focus-visible,.is-active) .rec-halo{opacity:1}
+#lyn .camera-click-glint{opacity:0;transform:scale(.83);transform-box:fill-box;transform-origin:center;pointer-events:none}
+#lyn .stage.camera-activated .camera-click-glint{animation:lyn-camera-glint .55s ease-out both}
+#lyn .stage.camera-activated .camera-lens-sheen{animation:lyn-camera-sheen .55s ease-out both}
+@keyframes lyn-camera-glint{0%{opacity:0;transform:scale(.83)}28%{opacity:.8;transform:scale(1.04)}100%{opacity:0;transform:scale(1.3)}}
+@keyframes lyn-camera-sheen{0%,100%{opacity:0}35%{opacity:.9}}
+/* Night is deeper blue, with a selective pool of warm light over the work area. */
+#lyn .stage[data-light="warm"] .scene-light-pool{opacity:.78}
+#lyn .stage[data-light="night"] .scene-light-pool{opacity:.89}
+@media (max-width:639px){
+  #lyn .stage[data-light="warm"] .scene-light-pool-mobile{opacity:.8}
+  #lyn .stage[data-light="night"] .scene-light-pool-mobile{opacity:.94}
+}
+@media (prefers-reduced-motion:reduce){
+  #lyn .stage .camera-click-glint,#lyn .stage .camera-lens-sheen{animation:none!important}
+  #lyn .window-night-view,#lyn .window-moon-rise,#lyn .window-sun,#lyn .window-sun-halo{transition:none!important}
+}
+#lyn[data-motion="reduced"] .camera-click-glint,#lyn[data-motion="reduced"] .camera-lens-sheen{animation:none!important}
+#lyn[data-motion="reduced"] .window-night-view,#lyn[data-motion="reduced"] .window-moon-rise,#lyn[data-motion="reduced"] .window-sun,#lyn[data-motion="reduced"] .window-sun-halo{transition:none!important}
+
+/* Mobile perspective correction: wall-mounted objects now stay entirely on side planes.
+   Side walls are wider in the portrait SVG; retain all original SVG objects and hit areas. */
+@media (max-width:639px){
+  .depth[data-d="2"] .hot[data-obj="window"] .obj{filter:drop-shadow(3px 3px 3px rgba(5,33,78,.22))}
+  .depth[data-d="2"] .hot[data-obj="wall"] .obj{filter:drop-shadow(-4px 5px 4px rgba(5,25,68,.26))}
+  .depth[data-d="2"] .hot[data-obj="window"]:is(:hover,:focus-visible,.is-active) .obj,
+  .depth[data-d="2"] .hot[data-obj="wall"]:is(:hover,:focus-visible,.is-active) .obj{filter:brightness(1.06) drop-shadow(0 0 8px rgba(255,255,255,.45))}
 }

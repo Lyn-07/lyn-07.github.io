@@ -159,19 +159,26 @@
     <svg class="scene" id="scene" viewBox="0 0 1000 640" aria-labelledby="scene-t">
       <title id="scene-t">Lyn's interactive studio, featuring a clickable ceiling lamp and plant alongside portfolio objects</title>
       <defs>
-        <linearGradient id="g-back" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#78A8EE"/><stop offset="1" stop-color="#4E86DA"/></linearGradient>
+        <linearGradient id="g-back" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#B0CFFA"/><stop offset=".48" stop-color="#7FABE8"/><stop offset="1" stop-color="#4E83CE"/></linearGradient>
         <radialGradient id="g-backlight" cx=".5" cy=".3" r=".65"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".32"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
-        <linearGradient id="g-left" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3A73CC"/><stop offset="1" stop-color="#5B91E3"/></linearGradient>
-        <linearGradient id="g-right" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#3268BF"/><stop offset="1" stop-color="#4F88DC"/></linearGradient>
-        <linearGradient id="g-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CCDAEF"/><stop offset="1" stop-color="#A3B9E0"/></linearGradient>
+        <linearGradient id="g-left" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2455A2"/><stop offset=".72" stop-color="#4380D1"/><stop offset="1" stop-color="#6AA0E9"/></linearGradient>
+        <linearGradient id="g-right" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#2454A0"/><stop offset=".7" stop-color="#4378C8"/><stop offset="1" stop-color="#79A5E4"/></linearGradient>
+        <linearGradient id="g-floor" x1="0" y1="0" x2=".25" y2="1"><stop offset="0" stop-color="#DCE8F6"/><stop offset=".48" stop-color="#C4D5EB"/><stop offset="1" stop-color="#8EA9D4"/></linearGradient>
         <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD9A6"/><stop offset=".55" stop-color="#FBEBD3"/><stop offset="1" stop-color="#C6DAF6"/></linearGradient>
         <linearGradient id="g-beam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF0D2" stop-opacity=".5"/><stop offset="1" stop-color="#FFF0D2" stop-opacity="0"/></linearGradient>
         <radialGradient id="g-warm"><stop offset="0" stop-color="#FFE3A6" stop-opacity=".8"/><stop offset="1" stop-color="#FFE3A6" stop-opacity="0"/></radialGradient>
         <radialGradient id="g-cool"><stop offset="0" stop-color="#E3EDFF" stop-opacity=".9"/><stop offset="1" stop-color="#E3EDFF" stop-opacity="0"/></radialGradient>
         <linearGradient id="g-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5F9FF"/><stop offset="1" stop-color="#BFD4F7"/></linearGradient>
-        <linearGradient id="g-cam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34507F"/><stop offset="1" stop-color="#16264A"/></linearGradient>
+        <linearGradient id="g-cam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#405F92"/><stop offset=".32" stop-color="#263F69"/><stop offset="1" stop-color="#101F3A"/></linearGradient>
         <radialGradient id="g-lens" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#6B95E0"/><stop offset=".5" stop-color="#1C3666"/><stop offset="1" stop-color="#060E1F"/></radialGradient>
         <radialGradient id="g-vig" cx=".5" cy=".42" r=".78"><stop offset=".55" stop-color="#163A78" stop-opacity="0"/><stop offset="1" stop-color="#163A78" stop-opacity=".28"/></radialGradient>
+        <linearGradient id="g-desk-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#FFF9EF"/><stop offset="1" stop-color="#CAD6EB"/></linearGradient>
+        <linearGradient id="g-desk-front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2EAF5"/><stop offset="1" stop-color="#AABFDE"/></linearGradient>
+        <linearGradient id="g-rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5FBFF"/><stop offset=".55" stop-color="#9EB5D7"/><stop offset="1" stop-color="#4F6C9A"/></linearGradient>
+        <radialGradient id="g-floor-highlight"><stop offset="0" stop-color="#FFF7D9" stop-opacity=".64"/><stop offset="1" stop-color="#FFF7D9" stop-opacity="0"/></radialGradient>
+        <radialGradient id="g-wall-bounce"><stop offset="0" stop-color="#F3F8FF" stop-opacity=".47"/><stop offset="1" stop-color="#F3F8FF" stop-opacity="0"/></radialGradient>
+        <radialGradient id="g-led"><stop offset="0" stop-color="#FF8D88" stop-opacity=".96"/><stop offset=".38" stop-color="#F14A48" stop-opacity=".8"/><stop offset="1" stop-color="#F14A48" stop-opacity="0"/></radialGradient>
+        <filter id="f-diffuse-shadow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="14"/></filter>
         <pattern id="g-slat" width="18" height="10" patternUnits="userSpaceOnUse"><rect width="1.5" height="10" fill="#FFFFFF" opacity=".12"/></pattern>
         <filter id="f-blur" x="-50%" y="-100%" width="200%" height="300%"><feGaussianBlur stdDeviation="8"/></filter>
         <filter id="f-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4"/></filter>
@@ -180,15 +187,20 @@
 
       <!-- Portrait architecture (mobile only); original SVG objects are repositioned, not stretched. -->
       <g class="studio-mobile-shell" pointer-events="none">
-        <path d="M0 0H620L530 85H90Z" fill="#376AB9"/>
-        <rect x="90" y="85" width="440" height="555" fill="url(#g-back)"/>
-        <rect x="90" y="85" width="440" height="555" fill="url(#g-backlight)"/>
-        <path d="M0 0L90 85V640L0 850Z" fill="url(#g-left)"/>
-        <path d="M620 0L530 85V640L620 850Z" fill="url(#g-right)"/>
-        <path d="M90 640H530L620 850H0Z" fill="url(#g-floor)"/>
-        <path d="M90 630H530" stroke="#2B5CA9" stroke-width="9"/>
-        <path d="M90 86H530" stroke="#EAF2FF" stroke-width="2" opacity=".7"/>
-        <path d="M192 640L130 850M300 640V850M405 640L490 850M0 748H620" stroke="#849FD0" stroke-width="1.5" opacity=".35"/>
+        <path d="M0 0H620L485 85H135Z" fill="#376AB9"/>
+        <rect x="135" y="85" width="350" height="555" fill="url(#g-back)"/>
+        <rect x="135" y="85" width="350" height="555" fill="url(#g-backlight)"/>
+        <path d="M0 0L135 85V640L0 850Z" fill="url(#g-left)"/>
+        <path d="M620 0L485 85V640L620 850Z" fill="url(#g-right)"/>
+        <path d="M135 640H485L620 850H0Z" fill="url(#g-floor)"/>
+        <path d="M135 630H485" stroke="#2B5CA9" stroke-width="9"/>
+        <path d="M135 86H485" stroke="#EAF2FF" stroke-width="3" opacity=".82"/>
+        <rect x="135" y="86" width="350" height="545" fill="url(#g-wall-bounce)" opacity=".55"/>
+        <path d="M135 96V640M485 96V640" stroke="#154687" stroke-width="5" opacity=".18"/>
+        <path d="M144 96H476" stroke="#FFFFFF" stroke-width="2" opacity=".3"/>
+        <path d="M138 640H482" stroke="#D4E3F5" stroke-width="4" opacity=".7"/>
+        <ellipse cx="310" cy="672" rx="260" ry="120" fill="url(#g-floor-highlight)" opacity=".6"/>
+        <path d="M202 640L135 850M310 640V850M418 640L485 850M0 748H620" stroke="#849FD0" stroke-width="1.5" opacity=".35"/>
         <rect width="620" height="850" fill="url(#g-vig)" opacity=".8"/>
       </g>
       <!-- Layer 1: room shell + wall objects -->
@@ -197,7 +209,10 @@
         <path d="M0 0H1000L800 90H200Z" fill="#3A6FC4"/><rect x="200" y="90" width="600" height="330" fill="url(#g-back)"/><rect x="200" y="90" width="600" height="330" fill="url(#g-backlight)"/><rect x="200" y="300" width="600" height="120" fill="url(#g-slat)"/>
         <path d="M0 0L200 90V420L0 640Z" fill="url(#g-left)"/><path d="M1000 0L800 90V420L1000 640Z" fill="url(#g-right)"/><path d="M200 420H800L1000 640H0Z" fill="url(#g-floor)"/>
         <path d="M260 420L100 640M320 420L200 640M380 420L300 640M440 420L400 640M500 420V640M560 420L600 640M620 420L700 640M680 420L800 640M740 420L900 640" stroke="#7F9BCB" stroke-width="1.5" opacity=".45"/><path d="M178 452H822M140 494H860M86 552H914" stroke="#7F9BCB" stroke-width="1" opacity=".3"/>
-        <rect x="200" y="410" width="600" height="10" fill="#3A6FC4"/><path d="M200 90V420M800 90V420" stroke="#2E5FB0" stroke-width="2" opacity=".5"/>
+        <ellipse cx="520" cy="455" rx="285" ry="150" fill="url(#g-wall-bounce)" opacity=".35" pointer-events="none"/>
+        <ellipse cx="515" cy="528" rx="330" ry="92" fill="url(#g-floor-highlight)" opacity=".65" pointer-events="none"/>
+        <rect x="200" y="410" width="600" height="10" fill="#2C5CAD"/>
+        <path d="M200 411H800" stroke="#C5D9F2" stroke-width="2.5" opacity=".8"/><path d="M200 90V420M800 90V420" stroke="#2E5FB0" stroke-width="2" opacity=".5"/>
         <path d="M200 93H800" stroke="#FFFFFF" stroke-width="8" opacity=".3" filter="url(#f-soft)"/><path d="M200 93H800" stroke="#EAF2FF" stroke-width="2"/>
         <rect width="1000" height="640" fill="url(#g-vig)" pointer-events="none"/>
 
@@ -205,8 +220,18 @@
         <!-- WINDOW -> Photography -->
         <g class="hot" data-obj="window" tabindex="0" role="button" aria-label="Window: photography gallery, Through My Lens">
           <g class="obj">
-            <g clip-path="url(#c-win)"><rect x="30" y="120" width="140" height="270" fill="url(#g-sky)"/><circle cx="122" cy="212" r="16" fill="#FFF6E2"/><path d="M30 300Q66 252 104 284T170 258V400H30Z" fill="#8CA9D8"/><path d="M30 330L170 296V400H30Z" fill="#B7CCEC"/><path d="M36 328L166 300M78 318V296M124 308V286" stroke="#4E6FA8" stroke-width="2"/><path d="M40 327Q60 304 78 296Q100 314 124 286Q146 300 166 300" stroke="#4E6FA8" stroke-width="1.2" fill="none"/><path class="win-glow" d="M40 134L160 150L160 315L40 376Z" fill="#FFF6E0"/></g>
-            <path d="M40 134L160 150L160 315L40 376Z" fill="none" stroke="#FBF8F1" stroke-width="5" stroke-linejoin="round"/><path d="M100 142V346M40 255L160 233" stroke="#FBF8F1" stroke-width="3"/><path d="M32 382L164 318L172 322L42 390Z" fill="#FBF8F1"/>
+            <g clip-path="url(#c-win)"><rect x="30" y="120" width="140" height="270" fill="url(#g-sky)"/><circle class="window-sun-halo" cx="122" cy="212" r="34" fill="url(#g-warm)"/><circle class="window-sun" cx="122" cy="212" r="16" fill="#FFF8DE"/><path d="M30 300Q66 252 104 284T170 258V400H30Z" fill="#8CA9D8"/><path d="M30 330L170 296V400H30Z" fill="#B7CCEC"/><path d="M36 328L166 300M78 318V296M124 308V286" stroke="#4E6FA8" stroke-width="2"/><path d="M40 327Q60 304 78 296Q100 314 124 286Q146 300 166 300" stroke="#4E6FA8" stroke-width="1.2" fill="none"/><path class="win-glow" d="M40 134L160 150L160 315L40 376Z" fill="#FFF6E0"/></g>
+            <g class="window-night-view" clip-path="url(#c-win)" pointer-events="none">
+              <path d="M30 120H175V400H30Z" fill="#112B5A"/>
+              <path d="M30 280Q68 250 105 277T170 265V400H30Z" fill="#264776"/>
+              <path d="M30 312L170 281V400H30Z" fill="#4F709C"/>
+              <g fill="#DCEBFF"><circle cx="68" cy="185" r="1.7"/><circle cx="88" cy="224" r="1.3"/><circle cx="145" cy="172" r="1.8"/><circle cx="52" cy="247" r="1.3"/><circle cx="151" cy="231" r="1.3"/></g>
+              <g class="window-moon-rise"><circle cx="122" cy="211" r="17" fill="#F7E9C5"/><circle cx="129" cy="205" r="15" fill="#112B5A"/><circle cx="114" cy="216" r="28" fill="url(#g-cool)" opacity=".15"/></g>
+            </g>
+            <path d="M40 134L160 150L160 315L40 376Z" fill="none" stroke="#1D4A8D" stroke-opacity=".38" stroke-width="12" stroke-linejoin="round"/>
+            <path d="M40 134L160 150L160 315L40 376Z" fill="none" stroke="url(#g-rim)" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M100 142V346M40 255L160 233" stroke="#FBF8F1" stroke-width="3.5"/><path d="M98 142V348M40 257L160 235" stroke="#7492C1" stroke-width="1" opacity=".7"/>
+            <path d="M32 382L164 318L172 322L42 390Z" fill="#FBF8F1"/><path d="M42 390L172 322V330L42 397Z" fill="#6C92C8" opacity=".58"/>
           </g>
           <g transform="translate(104 126)"><circle class="spot-ring" r="10"/><circle class="spot-dot" r="5"/></g>
           <g class="tag" transform="translate(30 84)"><rect width="140" height="28" rx="14"/><text x="70" y="19">Through My Lens</text></g>
@@ -227,7 +252,8 @@
         <!-- CAMPAIGN BOARD -> Bayan Baru case -->
         <g class="hot" data-obj="board" tabindex="0" role="button" aria-label="Campaign board: Bayan Baru Chinese New Year social campaign">
           <g class="obj">
-            <rect x="236" y="140" width="170" height="160" rx="6" fill="#163A78" opacity=".3" filter="url(#f-soft)"/><rect x="228" y="130" width="170" height="160" rx="6" fill="#0E3B80"/><rect x="236" y="138" width="154" height="144" rx="3" fill="#F3F6FC"/><rect x="246" y="148" width="64" height="8" rx="4" fill="#1551AA"/>
+            <rect x="236" y="140" width="170" height="160" rx="6" fill="#163A78" opacity=".3" filter="url(#f-soft)"/><rect x="228" y="130" width="170" height="160" rx="6" fill="#0E3B80"/>
+            <path d="M230 134H396" stroke="#7DA7E8" stroke-width="2.5" opacity=".7"/><path d="M396 134V285" stroke="#071F47" stroke-width="3" opacity=".5"/><rect x="236" y="138" width="154" height="144" rx="3" fill="#F3F6FC"/><rect x="246" y="148" width="64" height="8" rx="4" fill="#1551AA"/>
             <g fill="#D3E0F5"><rect x="246" y="164" width="12" height="10" rx="1.5"/><rect x="262" y="164" width="12" height="10" rx="1.5"/><rect x="278" y="164" width="12" height="10" rx="1.5"/><rect x="294" y="164" width="12" height="10" rx="1.5"/><rect x="310" y="164" width="12" height="10" rx="1.5"/><rect x="246" y="178" width="12" height="10" rx="1.5"/><rect x="262" y="178" width="12" height="10" rx="1.5"/><rect x="278" y="178" width="12" height="10" rx="1.5"/><rect x="310" y="178" width="12" height="10" rx="1.5"/><rect x="326" y="178" width="12" height="10" rx="1.5"/></g>
             <rect x="294" y="178" width="12" height="10" rx="1.5" fill="#1551AA"/><rect x="326" y="164" width="12" height="10" rx="1.5" fill="#E95D4F"/><path d="M270 204Q300 192 320 200T368 158" stroke="#E95D4F" stroke-width="1.2" fill="none" opacity=".7"/>
             <g class="card c1"><rect x="248" y="202" width="44" height="58" rx="2" fill="#FFFFFF" stroke="#D3E0F5"/><rect x="254" y="210" width="32" height="22" fill="#1551AA"/><path d="M254 240h28M254 248h18" stroke="#9DB2D6" stroke-width="3" stroke-linecap="round"/><circle cx="270" cy="204" r="3" fill="#E95D4F"/></g>
@@ -246,11 +272,13 @@
             <rect class="book b1" x="660" y="160" width="10" height="40" fill="#FBF8F1"/><rect class="book" x="672" y="154" width="12" height="46" fill="#0E3B80"/><rect class="book b2" x="686" y="164" width="10" height="36" fill="#F2C55D"/><rect x="698" y="156" width="14" height="44" fill="#E95D4F"/><rect x="714" y="166" width="10" height="34" fill="#FBF8F1" transform="rotate(14 724 200)"/>
             <path d="M748 200l3-20h22l3 20z" fill="#FBF8F1"/><path class="sway" d="M762 180c-3-14 4-24 14-26-1 11-6 20-14 26zM762 180c-7-10-16-12-22-9 4 8 13 12 22 9zM762 180c1-12-3-22-9-26-3 10-1 20 9 26z" fill="#2E8CA8"/>
             <rect x="652" y="200" width="136" height="6" rx="2" fill="#FBF8F1"/>
+            <path d="M654 206H786" stroke="#6486BA" stroke-width="2" opacity=".6"/>
             <rect x="662" y="218" width="26" height="44" fill="#FBF8F1"/><text x="675" y="245" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#1551AA">EN</text>
             <rect x="690" y="214" width="26" height="48" fill="#0E3B80"/><text x="703" y="243" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#FBF8F1">中文</text>
             <rect x="718" y="220" width="26" height="42" fill="#F2C55D"/><text x="731" y="246" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#14213D">BM</text>
             <g class="globe"><circle cx="768" cy="244" r="14" fill="#FBF8F1"/><path d="M754 244h28M768 230c-8 8-8 20 0 28M768 230c8 8 8 20 0 28" stroke="#1551AA" stroke-width="1.5" fill="none"/></g><path d="M768 258v4M760 262h16" stroke="#FBF8F1" stroke-width="3"/>
             <rect x="652" y="262" width="136" height="6" rx="2" fill="#FBF8F1"/>
+            <path d="M654 268H786" stroke="#6486BA" stroke-width="2" opacity=".6"/>
           </g>
           <g transform="translate(788 150)"><circle class="spot-ring" r="10"/><circle class="spot-dot" r="5"/></g>
           <g class="tag" transform="translate(665 118)"><rect width="110" height="28" rx="14"/><text x="55" y="19">About me</text></g>
@@ -272,7 +300,12 @@
       <g class="depth" data-d="5">
         <ellipse cx="540" cy="456" rx="215" ry="12" fill="#1C3F7A" opacity=".3" filter="url(#f-blur)"/><path d="M392 360V420M688 360V420" stroke="#9AAAC8" stroke-width="5"/><path d="M372 378V452M708 378V452" stroke="#D6DEEC" stroke-width="7" stroke-linecap="round"/>
         <path d="M630 378H712V440H630Z" fill="#E6ECF6"/><path d="M650 400h40M650 422h40" stroke="#A7B6D2" stroke-width="3" stroke-linecap="round"/>
-        <path d="M380 335H700L722 362H358Z" fill="#FBF8F1"/><path d="M358 362H722V378H358Z" fill="#D6DEEC"/>
+        <ellipse cx="542" cy="445" rx="190" ry="24" fill="#214D8A" opacity=".12" filter="url(#f-diffuse-shadow)"/>
+        <path d="M380 335H700L722 362H358Z" fill="url(#g-desk-top)"/>
+        <path d="M382 336H699" stroke="#FFFFFF" stroke-width="3" opacity=".85"/>
+        <path d="M358 362H722V378H358Z" fill="url(#g-desk-front)"/>
+        <path d="M360 363H720" stroke="#FFFFFF" stroke-width="2" opacity=".55"/>
+        <path d="M358 378H722" stroke="#87A5CF" stroke-width="2" opacity=".56"/>
         <ellipse cx="430" cy="344" rx="64" ry="13" fill="url(#g-warm)"/><path d="M426 298L390 342H470Z" fill="#FFE3A6" opacity=".22"/><ellipse cx="404" cy="337" rx="14" ry="3.5" fill="#0E3B80"/><path d="M404 335L394 302L420 288" stroke="#0E3B80" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M412 280L442 290L434 304L406 294Z" fill="#F2C55D"/>
         <rect x="664" y="318" width="18" height="20" rx="3" fill="#FFFFFF"/><path d="M682 323c7 0 7 10 0 10" stroke="#FFFFFF" stroke-width="2.5" fill="none"/><path class="steam" d="M669 312c-3-5 3-8 0-13" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/><path class="steam s2" d="M677 312c-3-5 3-8 0-13" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>
 
@@ -281,15 +314,19 @@
           <g class="obj">
             <ellipse class="screenglow" cx="540" cy="346" rx="150" ry="16" fill="url(#g-cool)"/><path d="M530 326H550L556 338H524Z" fill="#D6DEEC"/><ellipse cx="540" cy="339" rx="30" ry="4" fill="#B7C3DA"/>
             <rect x="452" y="222" width="176" height="104" rx="8" fill="#0A2048"/><rect x="460" y="230" width="160" height="88" rx="3" fill="url(#g-screen)"/>
+            <path d="M462 232H618" stroke="#FFFFFF" stroke-width="2" opacity=".7"/>
+            <path d="M620 234V316" stroke="#05142E" stroke-width="1.8" opacity=".5"/>
             <rect x="472" y="242" width="136" height="16" rx="8" fill="#FFFFFF" stroke="#1551AA" stroke-width="1.5"/><circle cx="482" cy="250" r="3.5" fill="none" stroke="#1551AA" stroke-width="1.5"/>
             <text x="491" y="254" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="500" fill="#1551AA"><tspan id="type-text">coffee rental</tspan><tspan class="caret">|</tspan></text>
             <rect x="472" y="266" width="70" height="5" rx="2.5" fill="#1551AA"/><rect x="472" y="276" width="104" height="4" rx="2" fill="#9DB2D6"/><rect x="472" y="285" width="88" height="4" rx="2" fill="#9DB2D6"/><rect x="472" y="298" width="60" height="5" rx="2.5" fill="#1551AA"/><rect x="472" y="307" width="96" height="4" rx="2" fill="#9DB2D6"/><path d="M590 308V296M598 308V288M606 308V292" stroke="#1551AA" stroke-width="5"/>
-            <rect class="screen-dim" x="460" y="230" width="160" height="88" rx="3"/><path d="M482 344H598L604 352H476Z" fill="#E6ECF6"/><ellipse cx="620" cy="348" rx="7" ry="4" fill="#E6ECF6"/>
+            <rect class="screen-dim" x="460" y="230" width="160" height="88" rx="3"/>
+            <rect x="474" y="313" width="60" height="2" rx="1" fill="#FFFFFF" opacity=".26"/><path d="M482 344H598L604 352H476Z" fill="#E6ECF6"/><ellipse cx="620" cy="348" rx="7" ry="4" fill="#E6ECF6"/>
           </g>
           <g transform="translate(628 226)"><circle class="spot-ring" r="10"/><circle class="spot-dot" r="5"/></g>
           <g class="tag" transform="translate(468 196)"><rect width="144" height="28" rx="14"/><text x="72" y="19">SEO and Analytics</text></g>
         </g>
-        <ellipse cx="604" cy="522" rx="64" ry="9" fill="#1C3F7A" opacity=".3" filter="url(#f-blur)"/><path d="M604 500L560 516M604 500L648 516M604 500V524M604 500L576 506M604 500L632 506" stroke="#1B3E7A" stroke-width="6" stroke-linecap="round"/><rect x="599" y="460" width="10" height="42" fill="#1B3E7A"/><path d="M552 446Q604 432 656 446L652 462Q604 474 556 462Z" fill="#1A4A94"/><rect x="560" y="372" width="88" height="80" rx="24" fill="#1F55A8"/><rect x="570" y="380" width="68" height="7" rx="3.5" fill="#6E9BE0" opacity=".8"/>
+        <ellipse cx="604" cy="522" rx="64" ry="9" fill="#1C3F7A" opacity=".3" filter="url(#f-blur)"/><path d="M604 500L560 516M604 500L648 516M604 500V524M604 500L576 506M604 500L632 506" stroke="#1B3E7A" stroke-width="6" stroke-linecap="round"/><rect x="599" y="460" width="10" height="42" fill="#1B3E7A"/><path d="M552 446Q604 432 656 446L652 462Q604 474 556 462Z" fill="#1A4A94"/><rect x="560" y="372" width="88" height="80" rx="24" fill="#1F55A8"/><path d="M576 380Q558 408 577 442" stroke="#8DADF0" stroke-width="3" opacity=".18" fill="none"/>
+        <rect x="570" y="380" width="68" height="7" rx="3.5" fill="#6E9BE0" opacity=".8"/>
       </g>
 
       <!-- Layer 3: plant + camera -->
@@ -299,6 +336,7 @@
           <rect x="39" y="443" width="144" height="190" fill="transparent"/>
           <g class="sway"><path d="M110 560C100 520 80 500 58 494" stroke="#2A7D96" stroke-width="3" fill="none"/><ellipse cx="70" cy="500" rx="20" ry="44" transform="rotate(-38 70 500)" fill="#2E8CA8"/><ellipse cx="112" cy="478" rx="18" ry="52" transform="rotate(6 112 478)" fill="#46A9C2"/><ellipse cx="150" cy="504" rx="18" ry="42" transform="rotate(34 150 504)" fill="#2E8CA8"/><ellipse cx="92" cy="526" rx="14" ry="30" transform="rotate(-62 92 526)" fill="#46A9C2"/></g>
           <path d="M70 556H152L142 630H80Z" fill="#FBF8F1"/><path d="M130 556H152L142 630H122Z" fill="#D6DEEC"/>
+          <path d="M72 558H150" stroke="#FFFFFF" stroke-width="4"/><path d="M80 630H142" stroke="#7A9CCB" stroke-opacity=".45" stroke-width="2"/>
         </g>
 
         <!-- CAMERA -> video production case -->
@@ -306,7 +344,16 @@
           <g class="obj">
             <ellipse cx="822" cy="630" rx="96" ry="10" fill="#1C3F7A" opacity=".3" filter="url(#f-blur)"/><path d="M820 470L748 626M820 470L894 626M820 470V634" stroke="#1B2A47" stroke-width="7" stroke-linecap="round"/><path d="M818 476L752 620M822 476L889 620" stroke="#5A76A8" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
             <rect x="806" y="454" width="28" height="20" rx="4" fill="#24375C"/><path d="M836 386V372Q836 364 844 364H870Q878 364 878 372V386Z" fill="#24375C"/><rect x="752" y="384" width="140" height="76" rx="12" fill="url(#g-cam)"/><rect x="762" y="389" width="120" height="5" rx="2.5" fill="#7D99CC" opacity=".6"/><rect x="752" y="390" width="22" height="66" rx="10" fill="#101D36"/>
-            <circle cx="810" cy="424" r="34" fill="#101D36"/><circle cx="810" cy="424" r="27" fill="#22365F" stroke="#7D99CC" stroke-width="2"/><circle cx="810" cy="424" r="16" fill="url(#g-lens)"/><path class="glint" d="M799 414a14 14 0 0 1 12-6" stroke="#EAF2FF" stroke-width="3" stroke-linecap="round" fill="none"/><circle class="rec" cx="878" cy="400" r="4.5" fill="#E95D4F"/>
+            <circle cx="810" cy="424" r="34" fill="#101D36"/><circle cx="810" cy="424" r="27" fill="#22365F" stroke="#7D99CC" stroke-width="2"/><circle cx="810" cy="424" r="16" fill="url(#g-lens)"/><path class="glint" d="M799 414a14 14 0 0 1 12-6" stroke="#EAF2FF" stroke-width="3" stroke-linecap="round" fill="none"/><circle class="rec-halo" cx="878" cy="400" r="19" fill="url(#g-led)"/>
+            <circle cx="878" cy="400" r="8" fill="#132642" stroke="#6A85B1" stroke-width="1.2"/>
+            <circle class="rec" cx="878" cy="400" r="5.7" fill="#FF514C"/>
+            <circle cx="876" cy="398" r="1.65" fill="#FFF3EF" opacity=".85"/>
+            <path d="M775 393H881" stroke="#9FB9E3" stroke-width="1.3" opacity=".44"/>
+            <path class="camera-lens-sheen" d="M797 410Q807 404 819 412" stroke="#FFF5DB" stroke-width="3" stroke-linecap="round" fill="none" opacity="0"/>
+            <g class="camera-click-glint" stroke="#FFE5B1" stroke-width="2.7" stroke-linecap="round" fill="none">
+              <path d="M807 387V397M807 448V459M767 424H777M846 424H856M777 394L784 402M834 446L841 454M838 395L831 402M782 447L775 454"/>
+              <circle cx="810" cy="424" r="42" stroke-width="1.7"/>
+            </g>
             <g class="flip"><rect x="892" y="398" width="56" height="42" rx="5" fill="#101D36"/><rect x="896" y="402" width="48" height="34" rx="3" fill="#E3EDFF"/><path d="M914 411l13 8-13 8z" fill="#1551AA"/></g>
           </g>
           <g transform="translate(892 372)"><circle class="spot-ring" r="10"/><circle class="spot-dot" r="5"/></g>
@@ -315,30 +362,28 @@
       </g>
       <!-- Lighting layers are visual only, so the project hotspots still work. -->
       <g class="scene-night" pointer-events="none">
-        <rect x="0" y="0" width="1000" height="640" fill="#0A1E4C" opacity=".42"/>
+        <rect x="0" y="0" width="1000" height="640" fill="#091737" opacity=".62"/>
         <g clip-path="url(#c-win)">
-          <rect x="30" y="120" width="140" height="270" fill="#102B5A" opacity=".87"/>
-          <path d="M116 186a16 16 0 1 1 16-25a17 17 0 1 0-16 25Z" fill="#F9EBBC"/>
-          <g fill="#E8F2FF"><circle cx="60" cy="182" r="1.6"/><circle cx="140" cy="235" r="1.5"/><circle cx="92" cy="163" r="1.3"/><circle cx="70" cy="250" r="1.2"/><circle cx="145" cy="190" r="1.2"/></g>
+          <rect x="30" y="120" width="140" height="270" fill="#122D61" opacity=".08"/>
         </g>
         <!-- Cool moonlight falls across the floor without masking room details. -->
         <path d="M153 244L470 590L272 620L70 355Z" fill="url(#g-cool)" opacity=".18"/>
         <ellipse cx="130" cy="274" rx="160" ry="180" fill="url(#g-cool)" opacity=".13"/>
       </g>
       <g class="scene-night-mobile" pointer-events="none">
-        <rect width="620" height="850" fill="#081D46" opacity=".34"/>
+        <rect width="620" height="850" fill="#071837" opacity=".57"/>
         <ellipse cx="105" cy="335" rx="120" ry="160" fill="url(#g-cool)" opacity=".21"/>
         <path d="M84 346L224 850H30Z" fill="url(#g-cool)" opacity=".21"/>
         <g fill="#EAF3FF" opacity=".9"><circle cx="48" cy="195" r="2"/><circle cx="85" cy="176" r="1.6"/><circle cx="164" cy="143" r="1.8"/><circle cx="481" cy="145" r="1.6"/></g>
-        <path d="M94 284a19 19 0 1 1 17-27a20 20 0 1 0-17 27Z" fill="#FFF0C6"/>
+        <!-- Moon lives inside the window, so it follows its mobile portrait position. -->
       </g>
       <g class="scene-light-pool-mobile" pointer-events="none">
-        <path d="M290 108H335L530 714H85Z" fill="url(#g-warm)" opacity=".32"/>
+        <path d="M290 108H335L530 714H85Z" fill="url(#g-warm)" opacity=".45"/>
         <ellipse cx="310" cy="140" rx="135" ry="95" fill="url(#g-warm)" opacity=".65"/>
         <ellipse cx="310" cy="113" rx="72" ry="30" fill="url(#g-warm)" opacity=".9"/>
       </g>
       <g class="scene-light-pool" pointer-events="none">
-        <path d="M519 79H561L784 596H288Z" fill="url(#g-warm)" opacity=".38"/>
+        <path d="M519 79H561L784 596H288Z" fill="url(#g-warm)" opacity=".48"/>
         <ellipse cx="540" cy="110" rx="124" ry="86" fill="url(#g-warm)" opacity=".68"/>
         <ellipse cx="540" cy="75" rx="75" ry="30" fill="url(#g-warm)" opacity=".9"/>
         <path d="M516 74Q540 44 564 74Z" fill="#FFF4CB"/>

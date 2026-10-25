@@ -383,6 +383,7 @@
     el.addEventListener("blur", () => hideStudioTip());
   }
 
+  let cameraGlintTimer = null;
   let lastHot = null, activeObj = null;
   const hotFor = (id) => $(`.hot[data-obj="${id}"]`, stage);
   function setActive(id) {
@@ -409,6 +410,14 @@
     const { focus = true, updateUrl = true } = o;
     const ob = D.room.find((r) => r.id === id); if (!ob) return;
     stage.classList.add("explored");
+    // A restrained single lens glint on activation — never a repeated hover flash.
+    if (id === "camera" && !reduced()) {
+      stage.classList.remove("camera-activated");
+      void stage.getBoundingClientRect();
+      stage.classList.add("camera-activated");
+      clearTimeout(cameraGlintTimer);
+      cameraGlintTimer = setTimeout(() => stage.classList.remove("camera-activated"), 600);
+    }
     setActive(id);
     const c = ob.caseId ? D.cases.find((x) => x.id === ob.caseId) : null;
     const pts = c ? c.highlights : ob.points || [];
@@ -516,6 +525,7 @@
   /* ---------- Views and history ---------- */
   function show(v) {
     root.classList.toggle("studio-open", v === "world");
+    if (v !== "world") { stage.classList.remove("camera-activated"); clearTimeout(cameraGlintTimer); }
     if (v !== "world") {
       setStudioSettings(false);
       setProjectMenu(false);
