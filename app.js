@@ -383,14 +383,41 @@
     el.addEventListener("blur", () => hideStudioTip());
   }
 
-  let cameraGlintTimer = null;
   let lastHot = null, activeObj = null;
   const hotFor = (id) => $(`.hot[data-obj="${id}"]`, stage);
+  const objectLabel = $("#studio-object-label");
+  function syncObjectLabel(id) {
+    if (!id || !objectLabel || !card.hidden) {
+      if (objectLabel) objectLabel.hidden = true;
+      return;
+    }
+    const hot = hotFor(id), art = hot && $(".obj", hot);
+    if (!art) { objectLabel.hidden = true; return; }
+    const originalTag = $(".tag text", hot);
+    objectLabel.textContent = originalTag ? originalTag.textContent.trim() : (D.room.find(o => o.id === id) || {}).label || id;
+    objectLabel.hidden = false;
+    const sr = scene.getBoundingClientRect(), r = art.getBoundingClientRect();
+    const w = objectLabel.offsetWidth;
+    const center = r.left + r.width / 2 - sr.left;
+    const left = Math.max(8, Math.min(center - w / 2, sr.width - w - 8));
+    const top = Math.max(10, Math.min(r.top - sr.top - objectLabel.offsetHeight - 7, sr.height - objectLabel.offsetHeight - 10));
+    objectLabel.style.left = Math.round(left) + "px";
+    objectLabel.style.top = Math.round(top) + "px";
+  }
   function setActive(id) {
     activeObj = id;
+    syncObjectLabel(id);
     $$(".hot", stage).forEach((h) => h.classList.toggle("is-active", h.dataset.obj === id));
     $$("#jump button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.objBtn === id)));
   }
+  $$(".hot", stage).forEach((hot) => {
+    hot.addEventListener("pointerenter", (e) => {
+      if (e.pointerType !== "touch" && !activeObj) syncObjectLabel(hot.dataset.obj);
+    });
+    hot.addEventListener("pointerleave", () => syncObjectLabel(activeObj));
+    hot.addEventListener("focus", () => { if (!activeObj) syncObjectLabel(hot.dataset.obj); });
+    hot.addEventListener("blur", () => syncObjectLabel(activeObj));
+  });
   function placeCard(id) {
     if (mobileStudio.matches) { card.style.left = card.style.top = card.style.width = ""; return; }
     const h = hotFor(id); if (!h) return;
@@ -410,20 +437,15 @@
     const { focus = true, updateUrl = true } = o;
     const ob = D.room.find((r) => r.id === id); if (!ob) return;
     stage.classList.add("explored");
-    // A restrained single lens glint on activation — never a repeated hover flash.
-    if (id === "camera" && !reduced()) {
-      stage.classList.remove("camera-activated");
-      void stage.getBoundingClientRect();
-      stage.classList.add("camera-activated");
-      clearTimeout(cameraGlintTimer);
-      cameraGlintTimer = setTimeout(() => stage.classList.remove("camera-activated"), 600);
-    }
+    // The camera now uses a steady, brighter red recording indicator instead of a flash.
     setActive(id);
     const c = ob.caseId ? D.cases.find((x) => x.id === ob.caseId) : null;
     const pts = c ? c.highlights : ob.points || [];
     const buttonText = c ? (mobileStudio.matches ? "View Case Study" : "Open the Case Study") : ob.cta;
     card.innerHTML = `<button type="button" class="rc-close" data-close aria-label="Close preview">${icon.x}</button><p class="rc-label">${objIcon(ob.id, 18)}${esc(ob.name)}</p><h2 class="rc-title" tabindex="-1">${esc(c ? c.title : ob.title)}</h2><p>${esc(ob.line)}</p>${pts.length ? `<ul class="rc-points">${pts.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}<button type="button" class="btn btn-blue btn-sm" data-act="open" data-target="${ob.id}">${esc(buttonText)}${icon.arrow}</button>`;
     card.hidden = false;
+    stage.classList.add("preview-open");
+    objectLabel.hidden = true;
     placeCard(id);
     if (focus) focusEl($(".rc-title", card));
     if (updateUrl) replaceHash("#world/" + id, { view: "world", obj: id });
@@ -433,9 +455,11 @@
     const { refocus = true, updateUrl = true } = o;
     setActive(null);
     card.hidden = true;
+    stage.classList.remove("preview-open");
     if (updateUrl && !$("#view-world").hidden) replaceHash("#world", { view: "world", obj: null });
     if (refocus && lastHot) focusEl(lastHot);
   }
+  window.addEventListener("resize", () => syncObjectLabel(activeObj));
   function setOrigin(h) {
     const r = $(".obj", h).getBoundingClientRect(), sr = scene.getBoundingClientRect();
     if (!sr.width) return;
@@ -445,6 +469,7 @@
     if (reduced()) { done(); return; }
     setOrigin(hotFor(id));
     card.hidden = true;
+    stage.classList.remove("preview-open");
     scene.classList.add("zoom");
     setTimeout(() => { done(); scene.classList.remove("zoom"); }, 480);
   }
@@ -525,13 +550,12 @@
   /* ---------- Views and history ---------- */
   function show(v) {
     root.classList.toggle("studio-open", v === "world");
-    if (v !== "world") { stage.classList.remove("camera-activated"); clearTimeout(cameraGlintTimer); }
     if (v !== "world") {
       setStudioSettings(false);
       setProjectMenu(false);
     }
     ["home", "world", "case"].forEach((n) => { $("#view-" + n).hidden = n !== v; });
-    if (v === "world") startTyping(); else { stopTyping(); setActive(null); card.hidden = true; }
+    if (v === "world") startTyping(); else { stopTyping(); setActive(null); card.hidden = true; stage.classList.remove("preview-open"); }
   }
   function showHome(id, o = {}) {
     const { push = true } = o;
@@ -560,7 +584,7 @@
       if (obj) {
         if (returning && !reduced()) { zoomOut(obj); setTimeout(() => openObj(obj, { updateUrl: false }), 520); }
         else openObj(obj, { updateUrl: false });
-      } else { card.hidden = true; setActive(null); focusEl(mobileStudio.matches ? $("#world-mobile-h") : $("#world-h")); }
+      } else { card.hidden = true; stage.classList.remove("preview-open"); setActive(null); focusEl(mobileStudio.matches ? $("#world-mobile-h") : $("#world-h")); }
     });
   }
   $("#view-world").addEventListener("animationend", (e) => { if (e.target.id === "view-world") e.target.classList.remove("world-enter"); });

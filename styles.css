@@ -640,3 +640,77 @@ html{scroll-behavior:smooth}
   .depth[data-d="2"] .hot[data-obj="window"]:is(:hover,:focus-visible,.is-active) .obj,
   .depth[data-d="2"] .hot[data-obj="wall"]:is(:hover,:focus-visible,.is-active) .obj{filter:brightness(1.06) drop-shadow(0 0 8px rgba(255,255,255,.45))}
 }
+
+
+/* ===== Night-time emissive objects and consistent mobile labels (2026-10-25) ===== */
+/* Quiet camera: the old ring/radial flare was distracting and looked web-like.
+   Record LED itself is the visual cue; nothing strobes or flashes. */
+#lyn .stage.camera-activated .camera-click-glint,
+#lyn .stage.camera-activated .camera-lens-sheen{animation:none!important;display:none!important}
+#lyn .hot[data-obj="camera"] .rec{opacity:1;filter:drop-shadow(0 0 4px rgba(255,68,67,.85))}
+#lyn .hot[data-obj="camera"] .rec-halo{opacity:1}
+
+/* The dark ambience remains dark. Selectively emit light from real sources. */
+#lyn .night-emissions{opacity:0;transition:opacity .55s ease;pointer-events:none}
+#lyn .stage[data-light="night"] .night-emissions{opacity:1}
+#lyn .stage[data-light="night"] .lamp-glow{opacity:1}
+#lyn .stage[data-light="night"] .scene-light-pool{opacity:.98}
+#lyn .stage[data-light="night"] .scene-light-pool-mobile{opacity:1}
+#lyn .stage[data-light="night"] .window-night-view{opacity:1}
+#lyn .studio-object-label{display:none}
+
+@media (max-width:639px){
+  /* The emission layer follows the same geometry as each interactive SVG object. */
+  #lyn .night-window-emission{transform:translate(0px,154px) scale(.68);transform-origin:0 0}
+  #lyn .night-computer-emission,
+  #lyn .night-desk-lamp-emission{transform:translate(-300px,150px) scale(1.12);transform-origin:0 0}
+  #lyn .night-camera-emission{transform:translate(-240px,270px) scale(.9);transform-origin:0 0}
+  #lyn .night-ceiling-emission{transform:translate(-203px,25px) scale(.95);transform-origin:0 0}
+  /* The previous .tag labels inherited each object's shrink scale, making
+     Through My Lens very small. A single HTML label now uses real CSS px. */
+  #lyn .scene .hot .tag{display:none}
+  #lyn .studio-object-label:not([hidden]){
+    position:absolute;z-index:4;display:block;box-sizing:border-box;max-width:calc(100% - 16px);
+    pointer-events:none;white-space:nowrap;text-align:center;
+    padding:8px 13px;border-radius:999px;border:1px solid rgba(17,59,121,.22);
+    background:#FBF8F1;color:#0E3B80;
+    box-shadow:0 5px 18px rgba(11,37,84,.19);
+    font:700 14px/1.2 var(--body);
+  }
+  #lyn .stage[data-light="night"] .studio-object-label:not([hidden]){
+    border-color:rgba(181,209,253,.5);background:#F9F8F2;color:#123B79;
+  }
+}
+@media (prefers-reduced-motion:reduce){#lyn .night-emissions{transition:none!important}}
+#lyn[data-motion="reduced"] .night-emissions{transition:none!important}
+
+/* ===== Studio usability / legibility refinements ===== */
+/* SVG text labels were painted beneath the night overlay. Render one HTML pill
+   outside the SVG on both desktop and mobile so contrast stays consistent. */
+#lyn .scene .hot .tag{display:none!important}
+#lyn .studio-object-label:not([hidden]){
+  position:absolute;z-index:4;display:block;box-sizing:border-box;
+  max-width:calc(100% - 16px);pointer-events:none;white-space:nowrap;
+  text-align:center;padding:8px 13px;border-radius:999px;
+  border:1px solid rgba(17,59,121,.22);background:#FBF8F1;color:#0E3B80;
+  box-shadow:0 5px 18px rgba(11,37,84,.19);font:700 14px/1.2 var(--body);
+}
+#lyn .stage[data-light="night"] .studio-object-label:not([hidden]){
+  border-color:rgba(181,209,253,.52);background:#FBF8F1;color:#123B79;
+  box-shadow:0 5px 18px rgba(0,8,31,.36);
+}
+/* Active card identifies the project; no competing floating labels. */
+#lyn .stage.preview-open .studio-object-label{display:none!important}
+/* The heading is focused by JS for reading order, but is not a keyboard stop. */
+#lyn .room-card .rc-title:focus{outline:none!important;box-shadow:none!important}
+/* Studio previews should be brief; complete evidence belongs to case studies. */
+@media (min-width:640px){
+  #lyn .room-card .rc-points{display:none}
+  #lyn .room-card{padding:18px 20px 18px;max-height:calc(100% - 80px);overflow-y:auto}
+  #lyn .room-card .rc-title{font-size:20px;line-height:1.27}
+  #lyn .room-card .btn{margin-top:8px}
+}
+/* The sticky website header used to overlap the Studio's welcome card.
+   Studio already has its own clear Leave Studio control on desktop and a
+   dedicated back button on mobile, so keep the primary nav out of this view. */
+#lyn.studio-open .top{display:none}
