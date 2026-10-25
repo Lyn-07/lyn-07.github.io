@@ -547,7 +547,7 @@ html{scroll-behavior:smooth}
   .depth[data-d="2"] .hot[data-obj="shelf"]{transform:translate(-239px, 110px) scale(.9);transform-origin:0 0}
   .depth[data-d="2"] .hot[data-obj="wall"]{transform:translate(-203px, 250px) scale(.85);transform-origin:0 0}
   .depth[data-d="2"] .lamp-switch{transform:translate(-203px, 25px) scale(.95);transform-origin:0 0}
-  .depth[data-d="2"] .studio-sign{transform:translate(-176px, 50px) scale(.9);transform-origin:0 0}
+  .studio-sign{transform:translate(-300px, -43px) scale(1.13);transform-origin:0 0}
   .depth[data-d="10"] .plant-hot{transform:translate(-15px, 150px) scale(1.1);transform-origin:0 0}
   .depth[data-d="10"] .hot[data-obj="camera"]{transform:translate(-240px, 270px) scale(.9);transform-origin:0 0}
   .depth[data-d="10"] > ellipse{display:none}
@@ -714,3 +714,36 @@ html{scroll-behavior:smooth}
    Studio already has its own clear Leave Studio control on desktop and a
    dedicated back button on mobile, so keep the primary nav out of this view. */
 #lyn.studio-open .top{display:none}
+
+
+/* ===== Name sign: a restrained neon accent rather than a blinking advert ===== */
+#lyn .studio-sign-lights{animation:lyn-sign-flicker 9s linear infinite}
+#lyn .studio-sign-rim{filter:drop-shadow(0 0 3px rgba(152,221,255,.6))}
+#lyn .studio-sign-text{filter:drop-shadow(0 0 4px rgba(163,224,255,.7))}
+#lyn .studio-sign-text-glow{opacity:.68}
+#lyn .studio-sign-halo{opacity:.32}
+#lyn .stage[data-light="night"] .studio-sign-halo{opacity:.58}
+#lyn .stage[data-light="night"] .studio-sign-rim{
+  filter:drop-shadow(0 0 5px rgba(155,226,255,.92)) drop-shadow(0 0 8px rgba(102,183,255,.45));
+}
+#lyn .stage[data-light="night"] .studio-sign-text{
+  filter:drop-shadow(0 0 4px #B5E9FF) drop-shadow(0 0 10px rgba(121,209,255,.72));
+}
+/* Brief occasional soft flicker; the name stays legible throughout. */
+@keyframes lyn-sign-flicker{
+  0%,64%,67%,100%{opacity:1}
+  64.4%{opacity:.79}
+  64.8%{opacity:1}
+  65.2%{opacity:.67}
+  65.8%{opacity:.94}
+}
+@media (prefers-reduced-motion:reduce){#lyn .studio-sign-lights{animation:none!important}}
+#lyn[data-motion="reduced"] .studio-sign-lights{animation:none!important}
+/* The lamp hint belongs in the ceiling strip on portrait screens;
+   it must not cover the new name sign when night mode is selected. */
+@media (max-width:639px){
+  #lyn .studio-tip-lamp{
+    top:1%;left:50%;max-width:calc(100% - 16px);
+    white-space:nowrap;font-size:10.5px;padding:6px 9px;
+  }
+}
