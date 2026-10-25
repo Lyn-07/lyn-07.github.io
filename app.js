@@ -277,39 +277,110 @@
 
   /* ---------- Studio ---------- */
   const stage = $("#stage"), scene = $("#scene"), card = $("#room-card"), shell = $("#stage-shell");
+  const mobileStudio = window.matchMedia("(max-width: 639px)");
+  // Swap only the SVG coordinate space; the same original objects remain interactive.
+  function syncStudioViewport() {
+    const portrait = mobileStudio.matches;
+    scene.setAttribute("viewBox", portrait ? "0 0 620 850" : "0 0 1000 640");
+    // Medium-width tablets keep the original direct project shortcuts.
+    const jumpEl = $("#jump"), toggleEl = $("#studio-projects-toggle");
+    if (jumpEl && toggleEl) jumpEl.hidden = portrait && toggleEl.getAttribute("aria-expanded") !== "true";
+    if (portrait) scene.style.transformOrigin = "50% 50%";
+  }
+  syncStudioViewport();
+  window.addEventListener("resize", syncStudioViewport);
   /* Studio micro-interactions: the ceiling lamp cycles day -> warm -> night -> day.
      It's deliberately decorative; no navigation, persistence, or account access. */
   const lightingModes = ["day", "warm", "night"];
-  const lamp = $("#lamp-switch"), lampTitle = $("#lamp-switch-title");
+  const lamp = $("#lamp-switch"), lampTip = $("#lamp-tip");
   let lightIndex = 0;
   function cycleLamp() {
     lightIndex = (lightIndex + 1) % lightingModes.length;
     syncLamp();
+    // Touch has no persistent hover: briefly confirm the next light action.
+    if (!window.matchMedia("(hover: hover)").matches) showStudioTip("lamp", true);
   }
   function syncLamp() {
     stage.dataset.light = lightingModes[lightIndex];
     const next = ["Turn on warm lighting", "Switch to night mode", "Turn lights off and return to daytime"][lightIndex];
     const state = ["off (daytime)", "on (warm)", "night mode"][lightIndex];
     lamp.setAttribute("aria-label", `Ceiling lamp: ${state}. ${next}.`);
-    lampTitle.textContent = next;
+    lampTip.textContent = next;
   }
   syncLamp();
 
   const plant = $("#plant-switch"), plantMessage = $("#plant-message");
-  const plantLines = ["🌱 Keep growing — one idea at a time.", "✨ Small beginnings, big possibilities.", "💚 Thanks for exploring my little corner!", "🍃 Stay curious. Good ideas take root."];
-  let lastPlant = -1, plantTimer = null;
+  const plantGreetings = [
+    "You weren't supposed to find this. 👀",
+    "Secret unlocked: You're officially curious.",
+    "You found my secret leaf! 🍃",
+    "Oh, hello there! Didn't see you coming.",
+    "You came all this way to see me? 🥹"
+  ];
+  const plantComfort = [
+    "You can rest here for a moment.",
+    "Some days, just being here is enough.",
+    "Here's a little peace for your day. 🍃"
+  ];
+  const plantEncouragement = [
+    "A little progress is still progress.",
+    "Good things take time to grow.",
+    "Bloom at your own pace.",
+    "Every little step counts.",
+    "Stay curious. Keep creating.",
+    "Create first. Perfect later.",
+    "Dare to try something different.",
+    "Psst... the plant believes in you.",
+    "Leaf your worries behind. 🍃"
+  ];
+  // Keep the stage across navigation within this page, reset on a new page load.
+  // Once stage three begins, shuffle all nine messages without replacement.
+  let plantClicks = 0, plantQueue = [], lastPlantLine = null, plantTimer = null;
+  const randomFrom = (lines) => lines[Math.floor(Math.random() * lines.length)];
+  function newPlantQueue() {
+    const shuffled = [...plantEncouragement];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    // A freshly shuffled cycle should not open with the prior cycle's last line.
+    if (shuffled[0] === lastPlantLine) [shuffled[0], shuffled[1]] = [shuffled[1], shuffled[0]];
+    return shuffled;
+  }
   function surprisePlant() {
-    // Random reward, without repeating the same message twice in a row.
-    let next = Math.floor(Math.random() * plantLines.length);
-    if (next === lastPlant) next = (next + 1) % plantLines.length;
-    lastPlant = next;
-    plantMessage.textContent = plantLines[next];
+    hideStudioTip();
+    const line = plantClicks === 0 ? randomFrom(plantGreetings)
+      : plantClicks === 1 ? randomFrom(plantComfort)
+      : (plantQueue.length || (plantQueue = newPlantQueue()), plantQueue.shift());
+    plantClicks++;
+    lastPlantLine = line;
+    plantMessage.textContent = line;
     plantMessage.hidden = false;
     plant.classList.remove("is-sparkling");
     void plant.getBoundingClientRect();
     plant.classList.add("is-sparkling");
     clearTimeout(plantTimer);
     plantTimer = setTimeout(() => { plantMessage.hidden = true; plant.classList.remove("is-sparkling"); }, 4200);
+  }
+
+  // Custom compact hints replace native SVG <title> rectangles.
+  let tipTimer = null;
+  function showStudioTip(which, brief = false) {
+    clearTimeout(tipTimer);
+    stage.dataset.hint = which;
+    if (brief) tipTimer = setTimeout(hideStudioTip, 1900);
+  }
+  function hideStudioTip() {
+    clearTimeout(tipTimer);
+    delete stage.dataset.hint;
+  }
+  for (const [el, which] of [[lamp, "lamp"], [plant, "plant"]]) {
+    el.addEventListener("pointerenter", (e) => {
+      if (e.pointerType !== "touch" && !(which === "plant" && !plantMessage.hidden)) showStudioTip(which);
+    });
+    el.addEventListener("pointerleave", () => hideStudioTip());
+    el.addEventListener("focus", () => showStudioTip(which));
+    el.addEventListener("blur", () => hideStudioTip());
   }
 
   let lastHot = null, activeObj = null;
@@ -320,7 +391,7 @@
     $$("#jump button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.objBtn === id)));
   }
   function placeCard(id) {
-    if (window.innerWidth < 640) { card.style.left = card.style.top = card.style.width = ""; return; }
+    if (mobileStudio.matches) { card.style.left = card.style.top = card.style.width = ""; return; }
     const h = hotFor(id); if (!h) return;
     const sr = shell.getBoundingClientRect(), r = $(".obj", h).getBoundingClientRect();
     const w = Math.min(300, sr.width * 0.42);
@@ -341,12 +412,13 @@
     setActive(id);
     const c = ob.caseId ? D.cases.find((x) => x.id === ob.caseId) : null;
     const pts = c ? c.highlights : ob.points || [];
-    card.innerHTML = `<button type="button" class="rc-close" data-close aria-label="Close">${icon.x}</button><p class="rc-label">${objIcon(ob.id, 18)}${esc(ob.name)}</p><h2 class="rc-title" tabindex="-1">${esc(c ? c.title : ob.title)}</h2><p>${esc(ob.line)}</p>${pts.length ? `<ul class="rc-points">${pts.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}<button type="button" class="btn btn-blue btn-sm" data-act="open" data-target="${ob.id}">${esc(c ? "Open the Case Study" : ob.cta)}${icon.arrow}</button>`;
+    const buttonText = c ? (mobileStudio.matches ? "View Case Study" : "Open the Case Study") : ob.cta;
+    card.innerHTML = `<button type="button" class="rc-close" data-close aria-label="Close preview">${icon.x}</button><p class="rc-label">${objIcon(ob.id, 18)}${esc(ob.name)}</p><h2 class="rc-title" tabindex="-1">${esc(c ? c.title : ob.title)}</h2><p>${esc(ob.line)}</p>${pts.length ? `<ul class="rc-points">${pts.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}<button type="button" class="btn btn-blue btn-sm" data-act="open" data-target="${ob.id}">${esc(buttonText)}${icon.arrow}</button>`;
     card.hidden = false;
     placeCard(id);
     if (focus) focusEl($(".rc-title", card));
     if (updateUrl) replaceHash("#world/" + id, { view: "world", obj: id });
-    if (focus && window.innerWidth < 640) card.scrollIntoView({ block: "nearest", behavior: reduced() ? "auto" : "smooth" });
+    // Fixed mobile preview stays in place without scrolling the room out of view.
   }
   function closeCard(o = {}) {
     const { refocus = true, updateUrl = true } = o;
@@ -412,8 +484,11 @@
   if (stored === "reduced") { root.dataset.motion = "reduced"; root.classList.remove("can-reveal"); $$(".reveal").forEach((el) => el.classList.add("in")); }
   const syncMotion = () => {
     const on = reduced();
-    mbtn.setAttribute("aria-pressed", String(on));
-    mbtn.textContent = mq.matches ? "Motion reduced by system" : on ? "Motion reduced" : "Reduce motion";
+    for (const btn of [mbtn, $("#motion-btn-mobile")]) {
+      if (!btn) continue;
+      btn.setAttribute("aria-pressed", String(on));
+      btn.textContent = mq.matches ? "Motion reduced by system" : on ? "Motion reduced" : "Reduce motion";
+    }
   };
   syncMotion();
   function toggleMotion() {
@@ -425,8 +500,26 @@
     if (!$("#view-world").hidden) startTyping();
   }
 
+  /* Mobile-only compact controls. They do not change desktop Studio. */
+  const settingsToggle = $("#studio-settings-toggle");
+  const settingsMenu = $("#studio-settings-menu");
+  const projectsToggle = $("#studio-projects-toggle");
+  const projectMenu = $("#jump");
+  function setStudioSettings(open) {
+    settingsMenu.hidden = !open;
+    settingsToggle.setAttribute("aria-expanded", String(open));
+  }
+  function setProjectMenu(open) {
+    projectMenu.hidden = !open;
+    projectsToggle.setAttribute("aria-expanded", String(open));
+  }
   /* ---------- Views and history ---------- */
   function show(v) {
+    root.classList.toggle("studio-open", v === "world");
+    if (v !== "world") {
+      setStudioSettings(false);
+      setProjectMenu(false);
+    }
     ["home", "world", "case"].forEach((n) => { $("#view-" + n).hidden = n !== v; });
     if (v === "world") startTyping(); else { stopTyping(); setActive(null); card.hidden = true; }
   }
@@ -457,7 +550,7 @@
       if (obj) {
         if (returning && !reduced()) { zoomOut(obj); setTimeout(() => openObj(obj, { updateUrl: false }), 520); }
         else openObj(obj, { updateUrl: false });
-      } else { card.hidden = true; setActive(null); focusEl($("#world-h")); }
+      } else { card.hidden = true; setActive(null); focusEl(mobileStudio.matches ? $("#world-mobile-h") : $("#world-h")); }
     });
   }
   $("#view-world").addEventListener("animationend", (e) => { if (e.target.id === "view-world") e.target.classList.remove("world-enter"); });
@@ -507,6 +600,8 @@
       else if (k === "open") openFromObject(a.dataset.target);
       else if (k === "leave") showHome(null);
       else if (k === "motion") toggleMotion();
+      else if (k === "studio-settings") setStudioSettings(settingsMenu.hidden);
+      else if (k === "toggle-projects") setProjectMenu(projectMenu.hidden);
       else if (k === "lamp") cycleLamp();
       else if (k === "plant") surprisePlant();
       else if (k === "top") toTop();
@@ -517,7 +612,8 @@
     const h = e.target.closest(".hot");
     if (h) { lastHot = h; openObj(h.dataset.obj); return; }
     const j = e.target.closest("[data-obj-btn]");
-    if (j) { lastHot = j; openObj(j.dataset.objBtn); }
+    if (j) { lastHot = j; setProjectMenu(false); openObj(j.dataset.objBtn); return; }
+    if (!e.target.closest(".studio-settings-area")) setStudioSettings(false);
   });
   stage.addEventListener("keydown", (e) => {
     const interactive = e.target.closest && e.target.closest(".lamp-switch, .plant-hot");
@@ -535,7 +631,12 @@
       hs[(i + (e.key === "ArrowRight" ? 1 : -1) + hs.length) % hs.length].focus();
     }
   });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#view-world").hidden && !card.hidden) closeCard(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || $("#view-world").hidden) return;
+    if (!settingsMenu.hidden) { setStudioSettings(false); focusEl(settingsToggle); }
+    else if (!card.hidden) closeCard();
+    else if (!projectMenu.hidden) { setProjectMenu(false); focusEl(projectsToggle); }
+  });
   window.addEventListener("resize", () => { if (activeObj && !card.hidden) placeCard(activeObj); });
 
   function route() {

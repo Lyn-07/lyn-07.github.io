@@ -116,7 +116,7 @@ window.PORTFOLIO = {
       work: [
         { kind: "video", platform: "instagram", title: "The Event Walkthrough Reel", source: "Instagram Reel · @genz_bayanbaru",
           description: "Mandarin Reel built on a hook, value, reward structure to promote the Chinese New Year event.",
-          stats: "67,940 views at day 5 (Instagram + Facebook)", statsNote: "Reel insights snapshot",
+          stats: "67,940 views at day 5 (Instagram + Facebook)",
           url: "https://www.instagram.com/reel/DT0QS24ErVt/", cta: "Watch Reel",
           thumb: "thumb-cny-walkthrough-reel.jpg", ratio: "1/1", position: "50% 35%" },
         { kind: "video", platform: "instagram", group: "later", title: "Where Did RM20,000 Go? — SPM Excellence Awards", source: "Instagram Reel · @genz_bayanbaru",
@@ -176,7 +176,7 @@ window.PORTFOLIO = {
       work: [
         { kind: "video", platform: "facebook", title: "AI-Assisted Video (Kling AI)", source: "Facebook · Published by Oriental Daily News Malaysia",
           description: "AI-assisted production published on Oriental Daily News Malaysia's Facebook page.",
-          stats: "About 40K views · 453 likes · 294 comments", statsNote: "when recorded",
+          stats: "About 40K views · 452 likes · 294 comments", statsNote: "Recorded 25 Oct 2026",
           url: "https://www.facebook.com/watch/?v=2277798306087706", cta: "Watch on Facebook",
           thumb: "thumb-oriental-daily-ai-video.jpg", ratio: "1/1", position: "50% 0%" },
         { kind: "video", platform: "facebook", title: "AI-Assisted Video", source: "Facebook · Posted by Saifuddin Nasution Ismail",
@@ -185,8 +185,8 @@ window.PORTFOLIO = {
           url: "https://www.facebook.com/share/r/19if7jYZYW/?mibextid=wwXIfr", cta: "Watch on Facebook",
           thumb: "thumb-saifuddin-ai-video.jpg", ratio: "1/1", position: "50% 40%" },
         { kind: "video", platform: "youtube", title: "8TV Mandarin News Live Segment", source: "YouTube · 8TV Mandarin News Live",
-          description: "Footage referenced in a Mandarin news segment.",
-          url: "https://www.youtube.com/watch?v=vkVxZNNH6ew", cta: "Watch on YouTube",
+          description: "My video appears from 35:42 to 37:42 in this Mandarin news segment.",
+          url: "https://www.youtube.com/watch?v=vkVxZNNH6ew&t=2142s", cta: "Watch on YouTube",
           thumb: "thumb-8tv-news-segment.jpg", ratio: "1/1", position: "50% 50%" }
       ],
       challenge: "Public information has to survive the scroll. These videos needed a hook in the first seconds, clear captions, and versions that worked for both Mandarin and Malay speakers.",
@@ -201,7 +201,7 @@ window.PORTFOLIO = {
         { value: "3", label: "core AI-generated video productions", note: "Made with Kling AI and Dora AI." },
         { value: "2", label: "Malay-language adaptations", note: "Versions of those videos, so 5 delivered AI-video versions in total. Not a count of all my video work." }
       ],
-      coverage: "One AI-assisted video was published by Oriental Daily News Malaysia on Facebook (about 40K views, 453 likes and 294 comments when recorded), and footage was referenced in an 8TV Mandarin News Live segment.",
+      coverage: "One AI-assisted video was published by Oriental Daily News Malaysia on Facebook (about 40K views, 452 likes and 294 comments, recorded 25 Oct 2026), and footage was referenced in an 8TV Mandarin News Live segment.",
       limits: "The views belong to the accounts that published these videos and to their audiences. I'm showing scripting, localisation and production work, not claiming a channel's reach. These projects don't represent a political position.",
       lessons: [
         "Localising is rewriting, not converting. A hook that works in Mandarin often needs a different angle for Malay-speaking viewers, not just a translated caption.",
